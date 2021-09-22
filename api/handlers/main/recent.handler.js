@@ -4,10 +4,7 @@ exports.getRecentPosts = async (req, res) => {
   const posts = await Posts.find({
     author: /.*/i,
   }).exec();
-  if (req.query.amount === "all") {
-    res.send({ posts: posts, isEnded: true }).end();
-    return;
-  }
+  posts.reverse();
   temp = Array.from(
     {
       length: req.query.amount,

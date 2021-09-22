@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const mainRouter = require("./handlers/main");
+const postRouter = require("./handlers/post");
 
 dotenv.config();
 const port = process.env.PORT;
@@ -13,6 +14,7 @@ app.use(express.json());
 // breakline (start)
 
 app.use("/", mainRouter);
+app.use("/post", postRouter);
 
 // breakline (end)
 
