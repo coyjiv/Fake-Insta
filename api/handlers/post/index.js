@@ -12,11 +12,6 @@ const router = express.Router();
 
 router.get("/", getAllPosts);
 router.post("/create", createPost);
-router.get("/:id", (req, res) => {
-  if (req.params.id === "create") {
-    res.status(400).send("This is a POST action.");
-  }
-});
 router.get("/:postId", getPostById);
 router.get("/:postId/comments", getCommentsOnPost);
 router.get("/:postId/lastcomment", getLastCommentOnPost);

@@ -56,22 +56,29 @@ exports.toggleLikeOnPost = async (req, res) => {
     return;
   });
 
+  if (!req.body.user) {
+    res.status(400).send("'user' variable is required").end();
+    return;
+  }
+
   if (!post) {
     res.status(404).send("Not found").end();
     return;
   }
 
-  if (!!post.isLikedByGuest) {
-    post.isLikedByGuest = false;
-    post.likeAmount--;
+  const status = [];
+
+  if (post.likes.includes(req.body.user)) {
+    post.likes.splice(post.likes.indexOf(req.body.user), 1);
+    status.push(false);
   } else {
-    post.isLikedByGuest = true;
-    post.likeAmount++;
+    post.likes.push(req.body.user);
+    status.push(true);
   }
 
   post.save();
 
-  res.status(200).send({ status: post.isLikedByGuest });
+  res.status(200).send({ status: status[0] }).end();
 };
 
 exports.writeCommentOnPost = async (req, res) => {
@@ -80,31 +87,47 @@ exports.writeCommentOnPost = async (req, res) => {
     return;
   });
 
+  if (!req.body.user || !req.body.message) {
+    res.status(400).send("'user' and 'message'  variables are required").end();
+    return;
+  }
+
   if (!post) {
     res.status(404).send("Not found").end();
     return;
   }
 
-  post.comments.push({ author: "guest", text: req.body.message });
+  post.comments.push({ author: req.body.user, message: req.body.message });
 
   post.save();
 
-  res.status(200).send(post.comments);
+  res.status(200).send(post.comments).end();
 };
 
 exports.createPost = async (req, res) => {
-  const post = new Posts({
-    image:
-      req.body.image ||
-      "https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg",
-    author: req.body.author || "guest",
-    description: req.body.description || "",
-    likeAmount: Math.ceil(Math.random() * 1000),
-    isLikedByGuest: false,
+  if (!req.body) {
+    res
+      .status(400)
+      .send("Every field must be filled (image, author, description)")
+      .end();
+    return;
+  }
+  if (!req.body.image || !req.body.author || !req.body.description) {
+    res
+      .status(400)
+      .send("Every field must be filled (image, author, description)")
+      .end();
+    return;
+  }
+  const post = await new Posts({
+    image: req.body.image,
+    author: req.body.author,
+    description: req.body.description,
+    likes: [],
     comments: [],
   });
 
   post.save();
 
-  res.status(200).send(post);
+  res.status(200).send(post).end();
 };

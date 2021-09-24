@@ -4,9 +4,7 @@ const model = mongoose.Schema({
   image: String,
   author: String,
   description: String,
-  likeAmount: Number,
-  commentAmount: Number,
-  isLikedByGuest: Boolean,
+  likes: Array,
   comments: Array,
 });
 
