@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd api && npm start && cd ..",
+    "start": "cd api && npm run dev && cd ..",
     "dev": "cd api && npm run dev && cd .. ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

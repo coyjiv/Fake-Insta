@@ -1,4 +1,5 @@
 const Posts = require("../../models/post.model");
+const Users = require("../../models/user.model");
 
 exports.getAllPosts = async (req, res) => {
   const posts = await Posts.find({
@@ -9,24 +10,22 @@ exports.getAllPosts = async (req, res) => {
 };
 
 exports.getPostById = async (req, res) => {
-  const post = await Posts.findById(req.params.postId).catch(() => {
-    res.status(404).send("Not Found").end();
-    return;
-  });
+  const post = await Posts.findById(req.params.postId)
+    .exec()
+    .catch(() => {});
 
   if (!post) {
     res.status(404).send("Not Found").end();
     return;
   }
 
-  res.send(post);
+  res.send(post).end();
 };
 
 exports.getCommentsOnPost = async (req, res) => {
-  const post = await Posts.findById(req.params.postId).catch(() => {
-    res.status(404).send("Not found").end();
-    return;
-  });
+  const post = await Posts.findById(req.params.postId)
+    .exec()
+    .catch(() => {});
 
   if (!post) {
     res.status(404).send("Not found").end();
@@ -37,10 +36,9 @@ exports.getCommentsOnPost = async (req, res) => {
 };
 
 exports.getLastCommentOnPost = async (req, res) => {
-  const post = await Posts.findById(req.params.postId).catch(() => {
-    res.status(404).send("Not found").end();
-    return;
-  });
+  const post = await Posts.findById(req.params.postId)
+    .exec()
+    .catch(() => {});
 
   if (!post) {
     res.status(404).send("Not found").end();
@@ -51,13 +49,23 @@ exports.getLastCommentOnPost = async (req, res) => {
 };
 
 exports.toggleLikeOnPost = async (req, res) => {
-  const post = await Posts.findById(req.params.postId).catch(() => {
-    res.status(404).send("Not found").end();
-    return;
-  });
+  const post = await Posts.findById(req.params.postId)
+    .exec()
+    .catch(() => {});
 
   if (!req.body.user) {
     res.status(400).send("'user' variable is required").end();
+    return;
+  }
+
+  const user = await Users.findOne({
+    username: req.body.user,
+  })
+    .exec()
+    .catch(() => {});
+
+  if (!user) {
+    res.status(404).send("User not found").end();
     return;
   }
 
@@ -82,10 +90,9 @@ exports.toggleLikeOnPost = async (req, res) => {
 };
 
 exports.writeCommentOnPost = async (req, res) => {
-  const post = await Posts.findById(req.params.postId).catch(() => {
-    res.status(404).send("Not found").end();
-    return;
-  });
+  const post = await Posts.findById(req.params.postId)
+    .exec()
+    .catch(() => {});
 
   if (!req.body.user || !req.body.message) {
     res.status(400).send("'user' and 'message'  variables are required").end();
@@ -94,6 +101,17 @@ exports.writeCommentOnPost = async (req, res) => {
 
   if (!post) {
     res.status(404).send("Not found").end();
+    return;
+  }
+
+  const user = await Users.findOne({
+    username: req.body.user,
+  })
+    .exec()
+    .catch(() => {});
+
+  if (!user) {
+    res.status(404).send("User not found");
     return;
   }
 
@@ -119,6 +137,18 @@ exports.createPost = async (req, res) => {
       .end();
     return;
   }
+
+  const user = await Users.findOne({
+    username: req.body.author,
+  })
+    .exec()
+    .catch(() => {});
+
+  if (!user) {
+    res.status(404).send("User not found");
+    return;
+  }
+
   const post = await new Posts({
     image: req.body.image,
     author: req.body.author,
@@ -128,6 +158,8 @@ exports.createPost = async (req, res) => {
   });
 
   post.save();
+  user.posts.push(post.id);
+  user.save();
 
   res.status(200).send(post).end();
 };
