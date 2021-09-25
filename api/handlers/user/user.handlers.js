@@ -294,7 +294,7 @@ exports.login = async (req, res) => {
     .catch(() => {});
 
   if (!login) {
-    res.status(400).send("Incorrect username or ").end();
+    res.status(400).send("Incorrect username or password").end();
     return;
   }
 
