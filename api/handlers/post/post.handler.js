@@ -163,3 +163,27 @@ exports.createPost = async (req, res) => {
 
   res.status(200).send(post).end();
 };
+
+exports.getPostsByIds = async (req, res) => {
+  if (!req.body.posts) {
+    res.status(400).send("'posts' is required").end();
+    return;
+  }
+
+  const result = req.body.posts.map(async (el) => {
+    const post = await Posts.findById(el)
+      .exec()
+      .catch(() => {});
+
+    if (!post) {
+      return;
+    }
+
+    return post;
+  });
+
+  temp = await Promise.all(result);
+
+  postsArray = temp.filter((el) => !!el);
+  res.send(postsArray.reverse());
+};

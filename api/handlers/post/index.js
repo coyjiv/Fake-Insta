@@ -7,11 +7,13 @@ const {
   toggleLikeOnPost,
   writeCommentOnPost,
   createPost,
+  getPostsByIds,
 } = require("./post.handler");
 const router = express.Router();
 
 router.get("/", getAllPosts);
 router.post("/create", createPost);
+router.get("/getpostswitharray", getPostsByIds);
 router.get("/:postId", getPostById);
 router.get("/:postId/comments", getCommentsOnPost);
 router.get("/:postId/lastcomment", getLastCommentOnPost);
