@@ -17,11 +17,11 @@ exports.getRecentPosts = async (req, res) => {
   temp2 = posts.filter((el) => user.subscribed.includes(el.author));
   temp = Array.from(
     {
-      length: req.query.amount,
+      length: req.query.to,
     },
     (_, i) => temp2[i]
   );
   const status = temp.length >= temp2.length ? true : false;
   temp = temp.filter((v) => !!v);
-  res.send({ posts: temp, isEnded: status }).end();
+  res.send({ posts: temp.slice(req.query.from), isEnded: status }).end();
 };
