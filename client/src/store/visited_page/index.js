@@ -6,7 +6,7 @@ const initialState = {
   description: "",
   subscribers: [],
   posts: [],
-  subscriptions: []
+  subscribed: []
 }
 
 export const visitedPageSlice = createSlice({

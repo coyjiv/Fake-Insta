@@ -7,7 +7,7 @@ const initialState = {
   description: "",
   subscribers: [],
   posts: [],
-  subscriptions: [],
+  subscribed: [],
   recommendations: []
 }
 
@@ -20,9 +20,6 @@ export const userSlice = createSlice({
     builder
       .addCase(authenticate.fulfilled, (state, action) => {
         Object.assign(state, action.payload);
-      })
-      .addCase(authenticate.rejected, (state, action) => {
-        state.error = action.payload;
       })
       .addCase(getRecommendations.fulfilled, (state, action) => {
         state.recommendations = action.payload;

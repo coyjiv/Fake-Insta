@@ -9,7 +9,8 @@
     "start-front": "npm start --prefix client",
     "dev": "npm-run-all -p dev-server start-front",
     "dev-server": "npm run dev --prefix api",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "download": "npm i && cd ./api && npm i && cd ../client && npm i"
   },
   "repository": {
     "type": "git",
