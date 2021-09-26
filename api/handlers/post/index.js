@@ -15,7 +15,7 @@ router.post("/create", createPost);
 router.get("/:postId", getPostById);
 router.get("/:postId/comments", getCommentsOnPost);
 router.get("/:postId/lastcomment", getLastCommentOnPost);
-router.get("/:postId/like", toggleLikeOnPost);
+router.post("/:postId/like", toggleLikeOnPost);
 router.post("/:postId/comment", writeCommentOnPost);
 
 module.exports = router;
