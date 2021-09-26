@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd api && npm run dev && cd ..",
-    "dev": "cd api && npm run dev && cd .. ",
+    "start": "npm-run-all -p start-server start-front",
+    "start-server": "npm start --prefix api",
+    "start-front": "npm start --prefix client",
+    "dev": "npm-run-all -p dev-server start-front",
+    "dev-server": "npm run dev --prefix api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +20,8 @@
   "bugs": {
     "url": "https://gitlab.com/yalukaiwo/fake-instagram/issues"
   },
-  "homepage": "https://gitlab.com/yalukaiwo/fake-instagram#readme"
+  "homepage": "https://gitlab.com/yalukaiwo/fake-instagram#readme",
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }
