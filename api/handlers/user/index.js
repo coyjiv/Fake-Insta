@@ -15,11 +15,11 @@ const {
 const router = express.Router();
 
 router.get("/", getAllUsers);
-router.get("/login", login);
+router.post("/login", login);
 router.get("/:username", getUserByUserName);
 router.get("/:username/subscribed", getUsersSubscriptions);
 router.get("/:username/recommendations", getRecommendations);
-router.get("/:username/subscribe", subscribeToUser);
+router.post("/:username/subscribe", subscribeToUser);
 router.put("/:username/changeusername", changeUsername);
 router.put("/:username/changedescription", changeDescription);
 router.put("/:username/changeimage", changeImage);
