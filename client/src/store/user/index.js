@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { authenticate, getRecommendations } from "./operations";
 
 const initialState = {
   image: "",
@@ -14,6 +15,18 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(authenticate.fulfilled, (state, action) => {
+        Object.assign(state, action.payload);
+      })
+      .addCase(authenticate.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(getRecommendations.fulfilled, (state, action) => {
+        state.recommendations = action.payload;
+      })
   },
 });
 

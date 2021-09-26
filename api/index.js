@@ -4,13 +4,22 @@ const mongoose = require("mongoose");
 const mainRouter = require("./handlers/main");
 const postRouter = require("./handlers/post");
 const userRouter = require("./handlers/user");
+const cors=require("cors");
 
 dotenv.config();
 const port = process.env.PORT;
 const databaseConnectionKey = process.env.DATABASE_CONNECTION_KEY;
 
-app = express();
+const app = express();
 app.use(express.json());
+
+const corsOptions ={
+  origin:'*', 
+  credentials:true,
+  optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions))
 
 // breakline (start)
 
