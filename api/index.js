@@ -4,22 +4,25 @@ const mongoose = require("mongoose");
 const mainRouter = require("./handlers/main");
 const postRouter = require("./handlers/post");
 const userRouter = require("./handlers/user");
-const cors=require("cors");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
 
 dotenv.config();
 const port = process.env.PORT;
 const databaseConnectionKey = process.env.DATABASE_CONNECTION_KEY;
 
 const app = express();
+app.use(fileUpload());
+app.use(express.static("public"));
 app.use(express.json());
 
-const corsOptions ={
-  origin:'*', 
-  credentials:true,
-  optionSuccessStatus:200,
-}
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 // breakline (start)
 

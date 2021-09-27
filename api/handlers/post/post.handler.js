@@ -1,5 +1,12 @@
 const Posts = require("../../models/post.model");
 const Users = require("../../models/user.model");
+const cloudinary = require("cloudinary");
+
+cloudinary.config({
+  cloud_name: "yalukaiwo",
+  api_key: "332999467945282",
+  api_secret: "ttJmPnCNV0NMnGvLbwSBJnjR-j4",
+});
 
 exports.getAllPosts = async (req, res) => {
   const posts = await Posts.find({
@@ -123,6 +130,8 @@ exports.writeCommentOnPost = async (req, res) => {
 };
 
 exports.createPost = async (req, res) => {
+  const file = req.files.image;
+
   if (!req.body) {
     res
       .status(400)
@@ -130,7 +139,7 @@ exports.createPost = async (req, res) => {
       .end();
     return;
   }
-  if (!req.body.image || !req.body.author || !req.body.description) {
+  if (!file || !req.body.author || !req.body.description) {
     res
       .status(400)
       .send("Every field must be filled (image, author, description)")
@@ -150,12 +159,31 @@ exports.createPost = async (req, res) => {
   }
 
   const post = await new Posts({
-    image: req.body.image,
+    image: "",
     author: req.body.author,
     description: req.body.description,
     likes: [],
     comments: [],
   });
+
+  file.name = `${post.id}.png`;
+
+  const base64 = file.data.toString("base64");
+
+  const response = await cloudinary.v2.uploader.upload(
+    `data:image/png;base64,${base64}`,
+    {
+      public_id: post.id,
+      folder: "postimages",
+      overwrite: true,
+      invalidate: true,
+      width: 1000,
+      height: 1000,
+      crop: "fill",
+    }
+  );
+
+  post.image = response.url;
 
   post.save();
   user.posts.push(post.id);

@@ -1,6 +1,14 @@
 const Users = require("../../models/user.model");
 const Passwords = require("../../models/login.model");
 
+const cloudinary = require("cloudinary");
+
+cloudinary.config({
+  cloud_name: "yalukaiwo",
+  api_key: "332999467945282",
+  api_secret: "ttJmPnCNV0NMnGvLbwSBJnjR-j4",
+});
+
 exports.getAllUsers = async (req, res) => {
   const users = await Users.find({
     username: /.*/i,
@@ -188,7 +196,8 @@ exports.changeDescription = async (req, res) => {
 };
 
 exports.changeImage = async (req, res) => {
-  if (!req.body.newImage) {
+  const file = req.files.image;
+  if (!file) {
     res.status(400).send("'newImage' is required").end();
     return;
   }
@@ -203,7 +212,25 @@ exports.changeImage = async (req, res) => {
     return;
   }
 
-  user.image = req.body.newImage;
+  file.name = `${user.id}.png`;
+
+  const base64 = file.data.toString("base64");
+
+  const response = await cloudinary.v2.uploader.upload(
+    `data:image/png;base64,${base64}`,
+    {
+      public_id: user.id,
+      folder: "avatars",
+      overwrite: true,
+      invalidate: true,
+      width: 1000,
+      height: 1000,
+      crop: "fill",
+    }
+  );
+
+  user.image = response.url;
+
   user.save();
   res.send(user).end();
 };
@@ -236,6 +263,7 @@ exports.changePassword = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
+  const file = req.files.image;
   if (!req.body) {
     res
       .status(400)
@@ -243,7 +271,7 @@ exports.createUser = async (req, res) => {
       .end();
     return;
   }
-  if (!req.body.image || !req.body.username || !req.body.password) {
+  if (!file || !req.body.username || !req.body.password) {
     res
       .status(400)
       .send("Every field must be filled (image, username, password)")
@@ -268,13 +296,32 @@ exports.createUser = async (req, res) => {
   });
 
   const user = new Users({
-    image: req.body.image,
+    image: "",
     username: req.body.username,
     description: "",
     posts: [],
     subscribed: [],
     subscribers: [],
   });
+
+  file.name = `${user.id}.png`;
+
+  const base64 = file.data.toString("base64");
+
+  const response = await cloudinary.v2.uploader.upload(
+    `data:image/png;base64,${base64}`,
+    {
+      public_id: user.id,
+      folder: "avatars",
+      overwrite: true,
+      invalidate: true,
+      width: 1000,
+      height: 1000,
+      crop: "fill",
+    }
+  );
+
+  user.image = response.url;
 
   login.save();
   user.save();
