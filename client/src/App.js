@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import AppRoutes from "./routes/AppRoutes";
 import { authenticate, getRecommendations } from "./store/user/operations";
 
-function App() {
-  const dispatch = useDispatch();
-
+function App({authenticate, getRecommendations}) {
   useEffect(() => {
-    dispatch(authenticate({username: "yalukaiwo", password: "password"}));
-    dispatch(getRecommendations("yalukaiwo"));
-  }, [dispatch])
+    authenticate({username: "yalukaiwo", password: "password"});
+    getRecommendations("yalukaiwo");
+  }, [authenticate, getRecommendations]);
 
   return (
     <>
@@ -18,4 +16,11 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    authenticate: (user) => dispatch(authenticate(user)),
+    getRecommendations: (user) => dispatch(getRecommendations(user))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);
