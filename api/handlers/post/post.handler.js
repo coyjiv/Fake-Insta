@@ -130,8 +130,6 @@ exports.writeCommentOnPost = async (req, res) => {
 };
 
 exports.createPost = async (req, res) => {
-  const file = req.files.image;
-
   if (!req.body) {
     res
       .status(400)
@@ -139,13 +137,15 @@ exports.createPost = async (req, res) => {
       .end();
     return;
   }
-  if (!file || !req.body.author || !req.body.description) {
+  if (!req.files || !req.body.author || !req.body.description) {
     res
       .status(400)
       .send("Every field must be filled (image, author, description)")
       .end();
     return;
   }
+
+  const file = req.files.image;
 
   const user = await Users.findOne({
     username: req.body.author,

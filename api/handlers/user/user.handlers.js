@@ -1,4 +1,5 @@
 const Users = require("../../models/user.model");
+const Posts = require("../../models/post.model");
 const Passwords = require("../../models/login.model");
 
 const cloudinary = require("cloudinary");
@@ -196,11 +197,12 @@ exports.changeDescription = async (req, res) => {
 };
 
 exports.changeImage = async (req, res) => {
-  const file = req.files.image;
-  if (!file) {
+  if (!req.files) {
     res.status(400).send("'newImage' is required").end();
     return;
   }
+
+  const file = req.files.image;
   const user = await Users.findOne({
     username: req.params.username,
   })
@@ -263,7 +265,6 @@ exports.changePassword = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-  const file = req.files.image;
   if (!req.body) {
     res
       .status(400)
@@ -271,13 +272,15 @@ exports.createUser = async (req, res) => {
       .end();
     return;
   }
-  if (!file || !req.body.username || !req.body.password) {
+  if (!req.files || !req.body.username || !req.body.password) {
     res
       .status(400)
       .send("Every field must be filled (image, username, password)")
       .end();
     return;
   }
+
+  const file = req.files.image;
 
   const check = await Users.findOne({
     username: req.body.username,
@@ -356,4 +359,27 @@ exports.login = async (req, res) => {
   } else {
     res.status(400).send("Incorrect username or password").end();
   }
+};
+
+exports.getUserPosts = async (req, res) => {
+  const user = await Users.findOne({
+    username: req.params.username,
+  })
+    .exec()
+    .catch();
+
+  if (!user) {
+    return res.status(404).send("User not found").end();
+  }
+
+  const posts = user.posts;
+
+  const postsMapped = posts.map(async (el) => {
+    const post = await Posts.findById(el);
+    return await post;
+  });
+
+  const postsSendable = await Promise.all(postsMapped);
+
+  res.send(postsSendable).end();
 };

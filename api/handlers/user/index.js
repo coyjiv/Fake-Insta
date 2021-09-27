@@ -11,12 +11,14 @@ const {
   createUser,
   login,
   changePassword,
+  getUserPosts,
 } = require("./user.handlers");
 const router = express.Router();
 
 router.get("/", getAllUsers);
 router.post("/login", login);
 router.get("/:username", getUserByUserName);
+router.get("/:username/posts", getUserPosts);
 router.get("/:username/subscribed", getUsersSubscriptions);
 router.get("/:username/recommendations", getRecommendations);
 router.post("/:username/subscribe", subscribeToUser);
