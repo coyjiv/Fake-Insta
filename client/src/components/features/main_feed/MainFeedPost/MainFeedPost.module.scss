@@ -1,0 +1,30 @@
+.container {
+  max-width: 600px;
+  margin-bottom: 24px;
+  border-radius: 3px;
+  border: 1px solid #dbdbdb;
+}
+
+.header {
+  background-color: rgb(250, 250, 250);
+  height: 60px;
+}
+
+.main {
+  &__image {
+    max-width:100%;
+    height:auto;
+  }
+}
+
+.footer {
+  background-color: rgb(250, 250, 250);
+
+  &__actions {
+    margin-top: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 8px;
+    padding-top: 6px;
+  }
+}
