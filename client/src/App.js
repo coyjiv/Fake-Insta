@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import AppRoutes from "./routes/AppRoutes";
 import { authenticate, getRecommendations } from "./store/user/operations";
+import "./reset.css";
 
 function App({authenticate, getRecommendations}) {
   useEffect(() => {
