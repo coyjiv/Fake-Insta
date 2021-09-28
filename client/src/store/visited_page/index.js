@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getUser, getSubscribed, getPosts } from "./operations";
 
 const initialState = {
   image: "",
@@ -13,6 +14,12 @@ export const visitedPageSlice = createSlice({
   name: "visitedPage",
   initialState,
   reducers: {
+  },
+  extraReducers: (builder) => {
+    builder
+        .addCase(getUser.fulfilled, (state, action) => {
+          Object.assign(state, action.payload);
+        })
   },
 });
 
