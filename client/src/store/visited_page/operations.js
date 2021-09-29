@@ -12,11 +12,20 @@ const getUser = createAsyncThunk(
 const getPosts = createAsyncThunk(
     'user/getPosts',
     async (username) => {
-        return (await axios(`/user/${username}`)).data.posts;
+        return (await axios(`/user/${username}/posts`)).data;
+    }
+);
+
+const subscribe = createAsyncThunk(
+    'user/subscribe',
+    async ({username, aunt}) => {
+        console.log(aunt)
+        return (await axios.post(`/user/${username}/subscribe`), {user:aunt}).data;
     }
 );
 
 export {
     getUser,
-    getPosts
+    getPosts,
+    subscribe
 }

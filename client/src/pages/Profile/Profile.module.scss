@@ -1,9 +1,11 @@
 .main{
   display: flex;
-  background-color: red;
+  background-color:#FAFAFA;
 }
 .container{
   margin: 0 auto 30px;
+  display: flex;
+  flex-direction: column;
   max-width: 935px;
   width: 100%;
   @media (min-width: 736px){

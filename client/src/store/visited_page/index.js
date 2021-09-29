@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, getSubscribed, getPosts } from "./operations";
+import { getUser, getPosts, subscribe } from "./operations";
+import {act} from "@testing-library/react";
 
 const initialState = {
   image: "",
@@ -18,7 +19,18 @@ export const visitedPageSlice = createSlice({
   extraReducers: (builder) => {
     builder
         .addCase(getUser.fulfilled, (state, action) => {
-          Object.assign(state, action.payload);
+          console.log("pay-to-load",action.payload)
+          state.image = action.payload.image
+          state.username = action.payload.username
+          state.description = action.payload.description
+          state.subscribers = action.payload.subscribers
+          state.subscribed = action.payload.subscribed
+        })
+        .addCase(getPosts.fulfilled, (state, action) => {
+          state.posts =  action.payload
+        })
+        .addCase(subscribe.fulfilled, (state, action) =>{
+          console.log("vrode podpisalsya", action.payload)
         })
   },
 });

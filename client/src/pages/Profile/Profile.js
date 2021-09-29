@@ -1,14 +1,22 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
-import {getUser} from "../../store/visited_page/operations";
+import {useParams} from "react-router-dom";
+import {getPosts, getUser, subscribe} from "../../store/visited_page/operations";
 import styles from "./Profile.module.scss";
 import Nickname from "../../components/basic/Nickname/Nickname";
+import Button from "../../components/basic/Button/Button";
+import VisitPostsWrapper from "../../components/feature/VisitPostsWrapper/VisitPostsWrapper";
 
 const Profile = (props) => {
+  const {username} = useParams();
   useEffect(() => {
-    props.getUser("yalukaiwo");
+    props.getUser(username);
     console.log(props)
   }, [getUser]);
+
+  useEffect(() => {
+    props.getPosts(username);
+  }, [getPosts]);
   return (
   <main className={styles.main}>
     <div className={styles.container}>
@@ -18,18 +26,22 @@ const Profile = (props) => {
         </div>
         <section className="ava-info__info">
           <div className="user-subscribe-settings">
-            <Nickname name={} fsize={}/>
-            <Button click={} content={}/>
+            <Nickname name={props.username} fsize="15"/>
+            <Button click={()=>props.subscribe(username,props.username)} content="Subscribe"/>
           </div>
-          <ul className="stats">
-            <li className="stat-element"></li>
-            <li className="stat-element"></li>
-            <li className="stat-element"></li>
+          <ul className={styles.stats}>
+            <li className="stat-element">{props.posts.length} постов</li>
+            <li className="stat-element">{props.subscribers.length} подписчиков</li>
+            <li className="stat-element">{props.subscribed.length} подписок</li>
           </ul>
-          <div className="description"></div>
+          <div className="description">
+            <p className="description">{props.description}</p>
+          </div>
         </section>
       </header>
-      <div className="post-content"></div>
+      <div className="post-content">
+        <VisitPostsWrapper posts={props.posts} imgwidth="293"/>
+      </div>
     </div>
   </main>
   );
@@ -37,7 +49,9 @@ const Profile = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser: (user) => dispatch(getUser(user))
+    getUser: (user) => dispatch(getUser(user)),
+    getPosts: (user) => dispatch(getPosts(user)),
+    subscribe: (user) => dispatch(subscribe(user))
   }
 }
 export default connect((state)=>state.visitedPage, mapDispatchToProps)(Profile);
