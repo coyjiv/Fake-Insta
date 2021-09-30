@@ -3,10 +3,12 @@
   margin-bottom: 24px;
   border-radius: 3px;
   border: 1px solid #dbdbdb;
+  box-sizing: border-box;
+
+  background-color: rgb(250, 250, 250);
 }
 
 .header {
-  background-color: rgb(250, 250, 250);
   height: 60px;
 }
 
@@ -18,13 +20,18 @@
 }
 
 .footer {
-  background-color: rgb(250, 250, 250);
-
   &__actions {
-    margin-top: 4px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 8px;
-    padding-top: 6px;
+    padding: 0 16px;
+    margin: 12px 0;
+  }
+
+  &__meta {
+    padding: 0 16px;
+    margin-bottom: 12px;
+  }
+  
+  &__description {
+    font-size: 14px;
+    font-weight: 400;
   }
 }
