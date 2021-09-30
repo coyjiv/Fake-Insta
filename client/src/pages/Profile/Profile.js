@@ -11,12 +11,13 @@ const Profile = (props) => {
   const {username} = useParams();
   useEffect(() => {
     props.getUser(username);
-    console.log(props)
   }, [getUser]);
 
   useEffect(() => {
     props.getPosts(username);
   }, [getPosts]);
+  console.log(username)
+  const aunt = props.username;
   return (
   <main className={styles.main}>
     <div className={styles.container}>
@@ -27,7 +28,7 @@ const Profile = (props) => {
         <section className="ava-info__info">
           <div className="user-subscribe-settings">
             <Nickname name={props.username} fsize="15"/>
-            <Button click={()=>props.subscribe(username,props.username)} content="Subscribe"/>
+            <Button click={()=>props.subscribe(username,aunt)} content="Subscribe"/>
           </div>
           <ul className={styles.stats}>
             <li className="stat-element">{props.posts.length} постов</li>
@@ -46,7 +47,6 @@ const Profile = (props) => {
   </main>
   );
 }
-
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: (user) => dispatch(getUser(user)),

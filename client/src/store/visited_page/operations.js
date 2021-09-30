@@ -20,7 +20,7 @@ const subscribe = createAsyncThunk(
     'user/subscribe',
     async ({username, aunt}) => {
         console.log(aunt)
-        return (await axios.post(`/user/${username}/subscribe`), {user:aunt}).data;
+        return (await axios.post(`/user/${username}/subscribe`), {"user":`${aunt}`}).data;
     }
 );
 

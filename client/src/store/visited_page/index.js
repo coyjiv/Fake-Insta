@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUser, getPosts, subscribe } from "./operations";
-import {act} from "@testing-library/react";
 
 const initialState = {
   image: "",
