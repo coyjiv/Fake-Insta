@@ -1,6 +1,7 @@
 .main{
   display: flex;
   background-color:#FAFAFA;
+  font-family: "Segoe UI";
 }
 .container{
   margin: 0 auto 30px;
@@ -14,15 +15,46 @@
     box-sizing: content-box;
   }
 }
-.avaInfo{
+.avaHeader{
   display: flex;
   @media (min-width: 736px){
     margin-bottom: 44px;
   }
 }
+.avaInfo{
+  flex-grow: 1;
+  margin-left: 53px;
+}
 .stats{
   display: flex;
+  justify-content: flex-start;
+  & :nth-child(1) {
+    margin-left: 0px;
+  }
 }
 .avatar{
   border-radius: 50%;
+}
+.postContent{
+  display:flex;
+  justify-content: center;
+}
+.statElement{
+  margin-left: 40px;
+  & span{
+    font-weight: 600;
+  }
+
+}
+.avaInfoSection{
+  flex-basis: 30px;
+  flex-grow: 4;
+}
+.subscribeSettings{
+  align-items: center;
+  display: flex;
+  box-sizing: border-box;
+  @media (min-width: 736px) {
+    margin-bottom: 20px;
+  }
 }

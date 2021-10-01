@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, getPosts, subscribe } from "./operations";
+import { getUser, getPosts, subscribe, checkIfSubscribed} from "./operations";
 
 const initialState = {
   image: "",
@@ -7,7 +7,9 @@ const initialState = {
   description: "",
   subscribers: [],
   posts: [],
-  subscribed: []
+  subscribed: [],
+    isSubscribing:false,
+    isSubscribed:false,
 }
 
 export const visitedPageSlice = createSlice({
@@ -18,7 +20,6 @@ export const visitedPageSlice = createSlice({
   extraReducers: (builder) => {
     builder
         .addCase(getUser.fulfilled, (state, action) => {
-          console.log("pay-to-load",action.payload)
           state.image = action.payload.image
           state.username = action.payload.username
           state.description = action.payload.description
@@ -28,8 +29,29 @@ export const visitedPageSlice = createSlice({
         .addCase(getPosts.fulfilled, (state, action) => {
           state.posts =  action.payload
         })
+        .addCase(checkIfSubscribed.fulfilled, (state, action) =>{
+            state.isSubscribed = action.payload;
+        })
+        .addCase(subscribe.pending, (state,action) =>{
+            state.isSubscribing = true;
+        })
         .addCase(subscribe.fulfilled, (state, action) =>{
-          console.log("vrode podpisalsya", action.payload)
+
+            const {subs, aunt, status} = action.payload;
+            if (!status){
+                const copySubs = [...subs];
+                copySubs.splice(
+                    copySubs.indexOf(aunt),
+                    1
+                );
+                state.subscribers = copySubs;
+                state.isSubscribed = false;
+            }
+            else{
+                state.subscribers = [...subs, aunt];
+                state.isSubscribed = true;
+            }
+            state.isSubscribing = false;
         })
   },
 });
