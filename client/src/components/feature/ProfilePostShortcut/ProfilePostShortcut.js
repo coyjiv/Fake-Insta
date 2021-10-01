@@ -11,20 +11,20 @@ const ProfilePostShortcut = ({ post }) => {
     setHovered(false);
   };
   return (
-      <div
-        className={classes.shortcut}
-        onMouseOver={mouseOver}
-        onMouseLeave={mouseOut}
-      >
-        <img
-          className={classes.shortcutImage}
-          src={post.image}
-          alt="shortcut"
-        ></img>
-        {isHovered && (
-          <ShortcutInfo likes={post.likes} comments={post.comments} />
-        )}
-      </div>
+    <div
+      className={classes.shortcut}
+      onMouseOver={mouseOver}
+      onMouseLeave={mouseOut}
+    >
+      <img
+        className={classes.shortcutImage}
+        src={post.image}
+        alt="shortcut"
+      ></img>
+      {isHovered && (
+        <ShortcutInfo likes={post.likes} comments={post.comments} />
+      )}
+    </div>
   );
 };
 
