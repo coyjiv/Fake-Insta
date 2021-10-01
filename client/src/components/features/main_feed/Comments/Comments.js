@@ -5,8 +5,7 @@ export default function Comments({comments}) {
   const [areShown, setAreShown] = useState(false);
   if (!comments.length) return <></>;
 
-  let shownComments = [comments[0]];
-  if (areShown) shownComments = [...shownComments, ...comments.slice(1)];
+  const shownComments = areShown ? comments : [comments[0]];
 
   const shownCommentsElements = shownComments.map((item, index) => (
     <p className={styles.comment} key={index}>
@@ -18,7 +17,7 @@ export default function Comments({comments}) {
   return (
     <div className={styles.container}>
       {shownCommentsElements}
-      {!areShown && <p className={styles.toggler} onClick={() => setAreShown(!areShown)}>Show all</p>}
+      {(!areShown && comments.length > 1) && <p className={styles.toggler} onClick={() => setAreShown(true)}>Show all</p>}
     </div>
   )
 }

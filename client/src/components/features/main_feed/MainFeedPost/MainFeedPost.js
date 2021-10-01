@@ -20,7 +20,7 @@ export const MainFeedPost = ({post, username, toggleLike}) => {
         {/* Author icon && name tag */}
       </header>
       <main className={styles.main}>
-        <img className={styles.main__image} src={post.image} alt="Post"/>
+        <img onDoubleClick={handleLikeClick} className={styles.main__image} src={post.image} alt="Post"/>
       </main>
       <footer className={styles.footer}>
         <section className={styles.footer__actions}>

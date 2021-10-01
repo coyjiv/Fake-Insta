@@ -15,11 +15,17 @@ export const AddComment = ({postId, username, saveComment}) => {
     setComment(event.target.value);
   }
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     if (!comment.trim().length) return;
     setDisabled(true);
     setComment("");
-    await saveComment({postId, username, message: comment});
+    saveComment({postId, username, message: comment});
+  }
+
+  const onEnterPress = (event) => {
+    if (event.code !== "Enter" || event.shiftKey) return;
+    event.preventDefault();
+    onSubmit();
   }
 
   return (
@@ -32,8 +38,21 @@ export const AddComment = ({postId, username, saveComment}) => {
         0-8-3.5-8.2-3.7-.5-.6-.4-1.6.2-2.1.6-.5 1.6-.4 2.1.2.1.1 2.1 2.5 5.8 2.5 3.7 0 5.8-2.5 5.8-2.5.5-.6 1.5-.7
         2.1-.2.6.5.7 1.5.2 2.1 0 .2-2.8 3.7-8 3.7z"></path>
       </svg>
-      <textarea className={styles.textarea} onChange={onTextAreaChange} value={comment} placeholder="Add comment..."/>
-      <button className={styles.submit} disabled={disabled} style={comment.trim().length ? {opacity: 1} : {}} onClick={onSubmit}>Submit</button>
+      <textarea
+        className={styles.textarea}
+        onChange={onTextAreaChange}
+        onKeyPress={onEnterPress}
+        value={comment}
+        placeholder="Add comment..."
+      />
+      <button
+        className={styles.submit}
+        disabled={disabled}
+        style={comment.trim().length ? {opacity: 1} : {}}
+        onClick={onSubmit}
+      >
+        Submit
+      </button>
     </div>
   )
 }
