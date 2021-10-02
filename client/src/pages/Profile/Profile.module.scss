@@ -21,19 +21,13 @@
     margin-bottom: 44px;
   }
 }
-.avaInfo{
-  flex-grow: 1;
-  margin-left: 53px;
-}
+
 .stats{
   display: flex;
   justify-content: flex-start;
   & :nth-child(1) {
     margin-left: 0px;
   }
-}
-.avatar{
-  border-radius: 50%;
 }
 .postContent{
   display:flex;

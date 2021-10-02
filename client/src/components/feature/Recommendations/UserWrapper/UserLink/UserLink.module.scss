@@ -1,0 +1,12 @@
+.container{
+  display: flex;
+  & img{
+    width: 30px;
+  }
+}
+.nickname{
+  font-size: 15px;
+}
+.ava{
+  width: 30px;
+}
