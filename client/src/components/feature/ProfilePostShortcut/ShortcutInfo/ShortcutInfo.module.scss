@@ -1,0 +1,53 @@
+.info {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 2.72px);
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.commentSvg {
+  width: 20px;
+  height: 20px;
+}
+
+.image {
+  width: 19px;
+  height: 19px;
+  display: block;
+}
+
+.commentImage {
+  background-image: url("https://res.cloudinary.com/yalukaiwo/image/upload/v1633112678/system/2021-10-01_21.23.26_v0bxkx.png");
+  background-size: 440px 411px;
+  background-position: -382px -263px;
+}
+
+.likeImage {
+  background-image: url("https://res.cloudinary.com/yalukaiwo/image/upload/v1633112678/system/2021-10-01_21.23.26_v0bxkx.png");
+  background-size: 440px 411px;
+  background-position: -382px -223px;
+}
+
+.propsValue {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18px;
+  color: #fff;
+}
+
+.propsEntity {
+  display: flex;
+  gap: 5px;
+}
+
+.propsWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
