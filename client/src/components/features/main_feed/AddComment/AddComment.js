@@ -44,12 +44,14 @@ export const AddComment = ({postId, username, saveComment}) => {
         onKeyPress={onEnterPress}
         value={comment}
         placeholder="Add comment..."
+        data-testid="add-comment-textarea"
       />
       <button
         className={styles.submit}
         disabled={disabled}
         style={comment.trim().length ? {opacity: 1} : {}}
         onClick={onSubmit}
+        data-testid="add-comment-button"
       >
         Submit
       </button>

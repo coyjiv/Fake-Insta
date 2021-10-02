@@ -8,7 +8,7 @@ export default function Comments({comments}) {
   const shownComments = areShown ? comments : [comments[0]];
 
   const shownCommentsElements = shownComments.map((item, index) => (
-    <p className={styles.comment} key={index}>
+    <p className={styles.comment} key={index} data-testid="comment">
       {/* Author name tag */}
       <span className={styles.comment__text}>: {item.message}</span>
     </p>
@@ -17,7 +17,16 @@ export default function Comments({comments}) {
   return (
     <div className={styles.container}>
       {shownCommentsElements}
-      {(!areShown && comments.length > 1) && <p className={styles.toggler} onClick={() => setAreShown(true)}>Show all</p>}
+      {
+        (!areShown && comments.length > 1) &&
+        <p
+          className={styles.toggler}
+          onClick={() => setAreShown(true)}
+          data-testid="comment-toggler"
+        >
+          Show all
+        </p>
+      }
     </div>
   )
 }
