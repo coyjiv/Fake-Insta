@@ -6,6 +6,6 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./docc/index.html"));
 });
-router.get("/recent", getRecentPosts);
+router.post("/recent", getRecentPosts);
 
 module.exports = router;
