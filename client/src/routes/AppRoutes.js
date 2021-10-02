@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import ProfilePostShortcut from "../components/feature/ProfilePostShortcut/ProfilePostShortcut";
+import ProfilePostShortcut from "../components/features/ProfilePostShortcut/ProfilePostShortcut";
 import Main from "../pages/Main/Main";
 import NotFound from "../pages/NotFound/NotFound";
 import Profile from "../pages/Profile/Profile";
