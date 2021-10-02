@@ -7,6 +7,7 @@ import Nickname from "../../components/basic/Nickname/Nickname";
 import Button from "../../components/basic/Button/Button";
 import VisitPostsWrapper from "../../components/feature/VisitPostsWrapper/VisitPostsWrapper";
 import {visitedPageSlice} from "../../store/visited_page";
+import Avatar from "../../components/basic/Avatar/Avatar";
 
 const Profile = (props) => {
   const {username} = useParams();
@@ -29,12 +30,10 @@ const Profile = (props) => {
   <main className={styles.main}>
     <div className={styles.container}>
       <header className={styles.avaHeader}>
-        <div className={styles.avaInfo}>
-          <img className={styles.avatar} width="150" src={props.visitedPage.image} alt="avatar"></img>
-        </div>
+        <Avatar image={props.visitedPage.image} />
         <section className={styles.avaInfoSection}>
           <div className={styles.subscribeSettings}>
-            <Nickname name={props.visitedPage.username} fsize="15"/>
+            <Nickname name={props.visitedPage.username}/>
             <Button click={()=>props.subscribe({username,aunt, subs:props.visitedPage.subscribers})} isSubscribed={props.visitedPage.isSubscribed} isSubscribing={props.visitedPage.isSubscribing}/>
           </div>
           <ul className={styles.stats}>
