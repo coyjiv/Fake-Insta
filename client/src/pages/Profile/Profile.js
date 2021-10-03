@@ -5,7 +5,7 @@ import {checkIfSubscribed, getPosts, getUser, subscribe} from "../../store/visit
 import styles from "./Profile.module.scss";
 import Nickname from "../../components/basic/Nickname/Nickname";
 import Button from "../../components/basic/Button/Button";
-import VisitPostsWrapper from "../../components/feature/VisitPostsWrapper/VisitPostsWrapper";
+import VisitPostsWrapper from "../../components/features/VisitPostsWrapper/VisitPostsWrapper";
 import {visitedPageSlice} from "../../store/visited_page";
 import Avatar from "../../components/basic/Avatar/Avatar";
 
@@ -13,18 +13,18 @@ const Profile = (props) => {
   const {username} = useParams();
   useEffect(() => {
     props.getUser(username);
-  }, [getUser]);
+  }, [getUser, username, props]);
 
   useEffect(() => {
     props.getPosts(username);
-  }, [getPosts]);
+  }, [getPosts, username, props]);
   const aunt = props.usernam;
   useEffect(() => {
     if (aunt){
       props.checkIfSubscribed({username, aunt});
     }
 
-  }, [checkIfSubscribed, aunt]);
+  }, [checkIfSubscribed, aunt, username, props]);
 
   return (
   <main className={styles.main}>
