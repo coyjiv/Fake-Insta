@@ -51,7 +51,7 @@ const PostModal = ({ closeModal, post, username, likePost }) => {
                   likePost({ postId: post.id, username });
                 }}
               />
-              <h3 className={classes.likeAmount}>{post.likes.length}</h3>
+              <h3 className={classes.likeAmount}>{post.likes.length} likes</h3>
             </div>
             <div className={classes.comments}>
               <AddComment postId={post.id} username={username} />

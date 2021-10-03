@@ -6,7 +6,7 @@ const initialState = {
   username: "",
   description: "",
   subscribers: [],
-  posts: [{ id: "6151f586178166eb1874f483", likes: [] }],
+  posts: [],
   subscribed: [],
 };
 
