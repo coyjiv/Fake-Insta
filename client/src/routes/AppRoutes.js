@@ -19,7 +19,53 @@ export default function AppRoutes() {
             author: "yalukaiwo",
             description: "what a nice day",
             likes: [],
-            comments: [],
+            comments: [
+              {
+                author: "yalukaiwo",
+                message:
+                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
+              },
+              {
+                author: "yalukaiwo",
+                message:
+                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
+              },
+              {
+                author: "yalukaiwo",
+                message:
+                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
+              },
+              {
+                author: "yalukaiwo",
+                message:
+                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
+              },
+              {
+                author: "yalukaiwo",
+                message:
+                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
+              },
+              {
+                author: "yalukaiwo",
+                message:
+                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
+              },
+              {
+                author: "yalukaiwo",
+                message:
+                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
+              },
+              {
+                author: "yalukaiwo",
+                message:
+                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
+              },
+              {
+                author: "yalukaiwo",
+                message:
+                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
+              },
+            ],
           }}
         />
       </Route>

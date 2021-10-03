@@ -25,20 +25,37 @@
 }
 
 .post {
-  max-width: 935px;
+  max-width: 785px;
+  max-height: 450px;
   height: 100%;
+  width: 100%;
   background-color: #fff;
   box-sizing: border-box;
+  display: flex;
 }
 
 .image {
-  height: 100%;
+  width: 100%;
 }
 
 .imageHolder {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 450px;
   height: 100%;
   background-color: #000;
+}
+
+.menu {
+  max-width: 335px;
+  min-width: 300px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.main {
+  overflow: auto;
+  max-height: 60%;
+  padding: 16px 16px 0;
 }

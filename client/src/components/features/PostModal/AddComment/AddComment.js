@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { saveComment } from "../../../../store/main_page/operations";
+import { commentPost } from "../../../../store/visited_page/operations";
 import styles from "./AddComment.module.scss";
+import { connect } from "react-redux";
 
-export const AddComment = ({ postId, username, saveComment }) => {
+export const AddComment = ({ postId, username, commentPost }) => {
   const [comment, setComment] = useState("");
   const [disabled, setDisabled] = useState(true);
 
@@ -19,7 +19,7 @@ export const AddComment = ({ postId, username, saveComment }) => {
     if (!comment.trim().length) return;
     setDisabled(true);
     setComment("");
-    saveComment({ postId, username, message: comment });
+    commentPost({ postId, username, message: comment });
   };
 
   const onEnterPress = (event) => {
@@ -60,13 +60,15 @@ export const AddComment = ({ postId, username, saveComment }) => {
         className={styles.submit}
         disabled={disabled}
         style={comment.trim().length ? { opacity: 1 } : {}}
-        onClick={onSubmit}
+        onClick={() => {
+          onSubmit();
+        }}
         data-testid="add-comment-button"
       >
-        Submit
+        Post
       </button>
     </div>
   );
 };
 
-export default connect(null, { saveComment })(AddComment);
+export default connect(null, { commentPost })(AddComment);
