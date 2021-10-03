@@ -7,10 +7,30 @@ import { connect } from "react-redux";
 import LikeIcon from "../../basic/LikeIcon/LikeIcon";
 import { likePost } from "../../../store/visited_page/operations";
 
-const PostModal = ({ closeModal, post, username, likePost }) => {
+const PostModal = ({ closeModal, post, username, likePost, image }) => {
+  const jsx = post.comments.map((el, index) => (
+    <Comment comment={el} key={index} />
+  ));
+  if (post.description !== "") {
+    jsx.unshift(
+      <Comment comment={{ author: post.author, message: post.description }} />
+    );
+  }
+
+  if (jsx.length === 0) {
+    jsx.push(<p className={classes.noComments}>No comments yet.</p>);
+  }
   return (
     <ScrollLock>
-      <div className={classes.modalRoot}>
+      <div
+        className={classes.modalRoot}
+        id="modalRoot"
+        onClick={(e) => {
+          if (e.target.id === "modalRoot") {
+            closeModal();
+          }
+        }}
+      >
         <div
           className={classes.closeModal}
           onClick={() => {
@@ -34,27 +54,31 @@ const PostModal = ({ closeModal, post, username, likePost }) => {
           </svg>
         </div>
         <div className={classes.post}>
-          <div className={classes.imageHolder}>
+          <div
+            className={classes.imageHolder}
+            onDoubleClick={() => {
+              likePost({ postId: post._id, username });
+            }}
+          >
             <img className={classes.image} alt="post" src={post.image} />
           </div>
           <div className={classes.menu}>
-            <div className={classes.header}></div>
-            <div className={classes.main}>
-              {post.comments.map((el, index) => (
-                <Comment comment={el} key={index} />
-              ))}
+            <div className={classes.header}>
+              <img src={image} className={classes.authorImage} alt={"author"} />
+              <p className={classes.authorName}>{post.author}</p>
             </div>
+            <div className={classes.main}>{jsx}</div>
             <div className={classes.footer}>
               <LikeIcon
                 isLiked={post.likes.includes(username)}
                 onClick={() => {
-                  likePost({ postId: post.id, username });
+                  likePost({ postId: post._id, username });
                 }}
               />
               <h3 className={classes.likeAmount}>{post.likes.length} likes</h3>
             </div>
             <div className={classes.comments}>
-              <AddComment postId={post.id} username={username} />
+              <AddComment postId={post._id} username={username} />
             </div>
           </div>
         </div>
@@ -65,6 +89,7 @@ const PostModal = ({ closeModal, post, username, likePost }) => {
 
 const mapStateToProps = (state) => ({
   username: state.user.username,
+  image: state.visitedPage.image,
 });
 
 export default connect(mapStateToProps, { likePost })(PostModal);

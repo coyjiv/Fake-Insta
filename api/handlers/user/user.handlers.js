@@ -381,5 +381,5 @@ exports.getUserPosts = async (req, res) => {
 
   const postsSendable = await Promise.all(postsMapped);
 
-  res.send(postsSendable).end();
+  res.send(postsSendable.reverse()).end();
 };

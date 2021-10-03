@@ -5,7 +5,7 @@ import styles from "./VisitPostsWrapper.module.scss";
 import ProfilePostShortcut from "../ProfilePostShortcut/ProfilePostShortcut";
 
 const VisitPostsWrapper = (props) => {
-    const postCol=props.posts;
+    console.log(props.posts)
     return(
     <div className={styles.wrapper}>
         {typeof props.posts[0]==="object"? props.posts.map((el)=><ProfilePostShortcut

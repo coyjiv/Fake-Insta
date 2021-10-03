@@ -18,6 +18,7 @@ const commentPost = createAsyncThunk(
 const likePost = createAsyncThunk(
   "user/likePost",
   async ({ postId, username }) => {
+    
     const status = await axios.post(`/post/${postId}/like`, {
       user: username,
     });

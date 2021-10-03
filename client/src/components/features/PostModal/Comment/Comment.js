@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import classes from "./Comments.module.scss";
 
 const Comments = (props) => {
@@ -14,17 +14,10 @@ const Comments = (props) => {
   }, []);
   return (
     <div className={classes.comment}>
-      <Link to={`/profile/${props.comment.author}`}>
-        <img alt="avatar" className={classes.image} src={image} />
-      </Link>
+      <img alt="avatar" className={classes.image} src={image || "/guest.png"} />
       <div className={classes.commentWrap}>
         <p className={classes.message}>
-          <Link
-            to={`/profile/${props.comment.author}`}
-            className={classes.link}
-          >
-            <span className={classes.author}>{props.comment.author}</span>
-          </Link>
+          <span className={classes.author}>{props.comment.author}</span>
           {props.comment.message}
         </p>
       </div>

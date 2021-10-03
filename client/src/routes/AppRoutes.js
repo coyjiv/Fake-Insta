@@ -10,65 +10,6 @@ export default function AppRoutes() {
     <Switch>
       <Route exact path="/" component={Main} />
       <Route exact path="/profile/:username" component={Profile} />
-      <Route exact path="/test">
-        <ProfilePostShortcut
-          post={{
-            id: "6151f586178166eb1874f483",
-            image:
-              "https://res.cloudinary.com/yalukaiwo/image/upload/v1632848969/postimages/61534c4485eeec72be8d74ec.jpg",
-            author: "yalukaiwo",
-            description: "what a nice day",
-            likes: [],
-            comments: [
-              {
-                author: "yalukaiwo",
-                message:
-                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
-              },
-              {
-                author: "yalukaiwo",
-                message:
-                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
-              },
-              {
-                author: "yalukaiwo",
-                message:
-                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
-              },
-              {
-                author: "yalukaiwo",
-                message:
-                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
-              },
-              {
-                author: "yalukaiwo",
-                message:
-                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
-              },
-              {
-                author: "yalukaiwo",
-                message:
-                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
-              },
-              {
-                author: "yalukaiwo",
-                message:
-                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
-              },
-              {
-                author: "yalukaiwo",
-                message:
-                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
-              },
-              {
-                author: "yalukaiwo",
-                message:
-                  "hahasdakjnsduasdiuashiudiahusdihuasduhasihudhiuasdhuiashiudaha",
-              },
-            ],
-          }}
-        />
-      </Route>
       <Route path="*" component={NotFound} />
     </Switch>
   );

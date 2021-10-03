@@ -26,6 +26,9 @@ exports.getPostById = async (req, res) => {
     return;
   }
 
+  const temp = post;
+  temp.comments = temp.comments.reverse();
+
   res.send(post).end();
 };
 
