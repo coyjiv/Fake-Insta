@@ -4,12 +4,15 @@
   border-radius: 3px;
   border: 1px solid #dbdbdb;
   box-sizing: border-box;
-
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: rgb(250, 250, 250);
 }
 
 .header {
   height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .main {
@@ -27,11 +30,13 @@
 
   &__meta {
     padding: 0 16px;
-    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
   }
   
   &__description {
     font-size: 14px;
     font-weight: 400;
+    margin-left: 10px;
   }
 }

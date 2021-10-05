@@ -1,0 +1,12 @@
+.wrapper{
+  margin-top: 20px;
+  display: flex;
+  height: 223px;
+  width: 214px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 23px;
+  & a div p{
+    margin-left: 15px;
+  }
+}

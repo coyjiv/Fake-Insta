@@ -1,9 +1,33 @@
 .recommendation{
-  background-color: #fafafa;
-  margin: 0 0 12px -16px;
-  width: calc(100% + 32px);
   display: flex;
   flex-direction: column;
-  position: fixed;
-  left: 672.5px;
+  position: sticky;
+  top: 20%;
+  z-index: 5;
+  background-color: #ffffff;
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  padding: 13px 0px 0px 17px;
+  height: 181px;
+  overflow-y: scroll;
+  width: 281px;
+}
+.rec{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #8e8e8e;
+  position: sticky;
+  top: 0;
+  &:before{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 31px;
+    position: absolute;
+    top: -13px;
+    left: -8px;
+    z-index: -1;
+    background-color: white;
+  }
 }

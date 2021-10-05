@@ -1,7 +1,7 @@
 .container{
   display: flex;
   & img{
-    width: 30px;
+    width: 32px;
   }
 }
 .nickname{
@@ -9,4 +9,5 @@
 }
 .ava{
   width: 30px;
+  margin: 0px;
 }

@@ -1,7 +1,18 @@
 .main{
   display: flex;
+  flex-wrap: wrap;
   background-color:#FAFAFA;
   font-family: "Segoe UI";
+  padding-top: 50px;
+  @media (max-width: 736px){
+    padding: 70px 20px 0;
+    width: calc(100% - 40px);
+    box-sizing: content-box;
+  }
+  @media (max-width: 469px) {
+    padding: 0px;
+    width: 100%;
+  }
 }
 .container{
   margin: 0 auto 30px;
@@ -17,8 +28,25 @@
 }
 .avaHeader{
   display: flex;
+  flex-wrap: wrap;
+  & div{
+    & img{
+      width: 150px;
+      @media (max-width: 736px){
+        width: 77px;
+      }
+      @media (max-width: 469px) {
+        width: 40px;
+      }
+    }
+
+
+  }
   @media (min-width: 736px){
     margin-bottom: 44px;
+  }
+  @media (max-width: 469px) {
+    padding: 90px 20px 0;
   }
 }
 
@@ -42,12 +70,58 @@
 }
 .avaInfoSection{
   flex-grow: 4;
+  & div:first-child{
+    & button{
+      width: 147px;
+    }
+  }
+  @media (max-width: 736px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 51px;
+    height: 230px;
+    flex-grow: 7;
+    & div:first-child{
+      align-items: flex-start;
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
+      box-sizing: border-box;
+      & button{
+        width: -moz-available;
+        width: -webkit-fill-available;
+        margin-left: 0px;
+        @media (max-width: 469px) {
+          width: 250px;
+        }
+      }
+    }
+    & ul{
+      font-size: 18px;
+      @media (max-width: 469px) {
+        font-size: 15px;
+      }
+    }
+  }
+  @media (max-width: 469px) {
+    margin-left: 5px;
+    height: 190px;
+  }
 }
 .subscribeSettings{
   align-items: center;
   display: flex;
   box-sizing: border-box;
+  & p{
+    font-size: 28px;
+  }
   @media (min-width: 736px) {
     margin-bottom: 20px;
+  }
+  @media (max-width: 736px){
+   & p{
+     font-size: 28px;
+   }
   }
 }

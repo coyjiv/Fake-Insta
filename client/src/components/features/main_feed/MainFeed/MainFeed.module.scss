@@ -4,3 +4,19 @@
   display: flex;
   flex-direction: column;
 }
+.globalWrapper{
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+  gap: 50px;
+  background-color: #FAFAFA;
+}
+.recWrapper{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 135px;
+  @media (max-width:999px) {
+    display: none;
+  }
+}

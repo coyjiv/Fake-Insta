@@ -12,10 +12,10 @@ import Nickname from "../../components/basic/Nickname/Nickname";
 import Button from "../../components/basic/Button/Button";
 import VisitPostsWrapper from "../../components/features/VisitPostsWrapper/VisitPostsWrapper";
 import Avatar from "../../components/basic/Avatar/Avatar";
+import Header from "../Main/Header/Header";
 
 const Profile = (props) => {
   const { username } = useParams();
-  console.log(props.usernam, username);
   useEffect(() => {
     props.getUser(username);
   }, [getUser]);
@@ -29,17 +29,18 @@ const Profile = (props) => {
       props.checkIfSubscribed({ username, aunt });
     }
   }, [checkIfSubscribed, aunt, username]);
-
   return (
+      <>
+      <Header/>
     <main className={styles.main}>
       <div className={styles.container}>
         <header className={styles.avaHeader}>
-          <Avatar image={props.visitedPage.image} />
+          <Avatar image={props.visitedPage.image}/>
           <section className={styles.avaInfoSection}>
             <div className={styles.subscribeSettings}>
               <Nickname name={props.visitedPage.username} />
               {!(username === props.usernam) && (
-                <Button
+                <Button variation={1}
                   click={() =>
                     props.subscribe({
                       username,
@@ -54,13 +55,13 @@ const Profile = (props) => {
             </div>
             <ul className={styles.stats}>
               <li className={styles.statElement}>
-                <span> {props.visitedPage.posts.length}</span> постов
+                <span> {props.visitedPage.posts.length}</span> posts
               </li>
               <li className={styles.statElement}>
-                Подписчики: <span> {props.visitedPage.subscribers.length}</span>
+                Subscribers: <span> {props.visitedPage.subscribers.length}</span>
               </li>
               <li className={styles.statElement}>
-                Подписки: <span> {props.visitedPage.subscribed.length}</span>
+                Subscribed: <span> {props.visitedPage.subscribed.length}</span>
               </li>
             </ul>
             <div className="description">
@@ -73,6 +74,7 @@ const Profile = (props) => {
         </div>
       </div>
     </main>
+        </>
   );
 };
 const mapDispatchToProps = (dispatch) => {

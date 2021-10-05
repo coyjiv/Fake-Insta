@@ -3,8 +3,8 @@ import styles from "./Avatar.module.scss";
 
 const Avatar = (props) => {
     return(
-        <div className={styles.avaInfo}>
-            <img className={styles.avatar} src={props.image} alt="avatar"></img>
+        <div className={styles.avaInfo} style={props.addR}>
+            <img className={styles.avatar} src={props.image} style={props.styledimage} alt="avatar"></img>
         </div>
     );
 }

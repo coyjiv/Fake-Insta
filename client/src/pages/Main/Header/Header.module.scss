@@ -1,0 +1,22 @@
+.header{
+  width: 100%;
+  position: fixed;
+  z-index: 3;
+  height: 54px;
+  background-color:#fff;
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  justify-content: center;
+}
+.container{
+  @extend .header;
+  border: 0px;
+  width: 975px;
+  margin: 0px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & img{
+    display: block;
+  }
+}
