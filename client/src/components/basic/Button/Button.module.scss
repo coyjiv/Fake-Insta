@@ -39,7 +39,20 @@
   //  padding: 15px 24px;
   //}
 }
-
+.secondButton{
+  border: 0px solid;
+  background-color: transparent;
+  color: #0095f6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+}
+.secondUnsubscibeButton{
+  @extend .secondButton;
+  color: #262626;
+}
 .ldsSpinner {
   color: black;
   display: inline-block;

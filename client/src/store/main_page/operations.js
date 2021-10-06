@@ -23,21 +23,8 @@ const saveComment = createAsyncThunk(
     return {comments, postId};
   }
 );
-
-const getSubscribedUsers = createAsyncThunk(
-    'mainPage/getSubscribedUsers',
-    async (username) => {
-        const subscribedNicknames = (await axios(`/user/${username}/subscribed`)).data;
-        const fullInfo = subscribedNicknames.map(async (nickname)=>{
-             return (await axios(`/user/${nickname}`))
-        })
-        const res = await  Promise.all(fullInfo)
-        return res.map((el)=>el.data);
-    }
-);
 export {
   loadPosts,
   toggleLike,
   saveComment,
-    getSubscribedUsers
 }

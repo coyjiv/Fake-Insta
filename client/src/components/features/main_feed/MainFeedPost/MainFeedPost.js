@@ -11,7 +11,6 @@ import Nickname from "../../../basic/Nickname/Nickname";
 
 export const MainFeedPost = ({post, username, toggleLike, isLoading}) => {
   const [isLikedPost, setIsLikedPost] = useState(post.likes.includes(username));
-    console.log(isLoading)
   const handleLikeClick = () => {
     setIsLikedPost(prev => !prev);
     toggleLike({postId: post._id, username});

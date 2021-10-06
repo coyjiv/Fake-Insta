@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loadPosts, saveComment, toggleLike, getSubscribedUsers} from "./operations";
+import { loadPosts, saveComment, toggleLike} from "./operations";
 
 const initialState = {
   posts: [],
   isEnded: null,
   isLoading: true,
-  subscribed:[]
 }
 
 export const mainPageSlice = createSlice({
@@ -34,9 +33,6 @@ export const mainPageSlice = createSlice({
         const post = state.posts.find(item => item._id === postId);
         post.comments = comments;
       })
-        .addCase(getSubscribedUsers.fulfilled, (state, action) => {
-          state.subscribed = action.payload;
-        })
   },
 });
 

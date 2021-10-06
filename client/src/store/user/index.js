@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { authenticate, getRecommendations } from "./operations";
+import { authenticate, getRecommendations, subscribeMain } from "./operations";
 
 const initialState = {
   image: "",
@@ -23,10 +23,19 @@ export const userSlice = createSlice({
       })
       .addCase(getRecommendations.fulfilled, (state, action) => {
         state.recommendations = action.payload;
-      });
+      })
+    .addCase(subscribeMain.fulfilled, (state, action)=>{
+      const { subscribed, username, status } = action.payload;
+      if (!status) {
+
+        const copySubscribed = [...subscribed];
+        copySubscribed.splice(copySubscribed.indexOf(username), 1);
+        state.subscribed = copySubscribed;
+      } else {
+        state.subscribed = [...subscribed, username];
+      }
+    })
   },
 });
-
-// export const {} = userSlice.actions
 
 export default userSlice.reducer;

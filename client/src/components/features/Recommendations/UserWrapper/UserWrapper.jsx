@@ -1,52 +1,46 @@
-import React, {useEffect} from 'react';
+import React, {useRef} from 'react';
 import {NavLink} from "react-router-dom";
 import UserLink from "./UserLink/UserLink";
 import styles from "./UserWrapper.module.scss";
 import Button from "../../../basic/Button/Button";
-import {subscribe} from "../../../../store/visited_page/operations";
+import {subscribeMain} from "../../../../store/user/operations";
 import {connect} from "react-redux";
-import {getSubscribedUsers} from "../../../../store/main_page/operations";
 
 const UserWrapper = (props) => {
-    useEffect(()=>props.getSubscribedUsers(props.usernam),[getSubscribedUsers])
-    const {users,sub} = props;
-    if (sub===false){
+    const {users, sub,username,subscribed} = props;
+    if (sub === false) {
         return (
             <div className={styles.wrapper}>
-                {users.map((element)=>
-                    <NavLink key={element._id}
-                             exact to={`/profile/${element.username}`}>
+                {users.map((element) =>
+                    <div key={element._id}>
+                    <NavLink exact to={`/profile/${element.username}`}>
                         <UserLink ava={element.image} nick={element.username}
-                                  stylednick={{fontWeight:600}}/></NavLink>)}
+                                  stylednick={{fontWeight: 600, fontSize:"14px", marginLeft:"10px"}}/></NavLink>
+                    </div>)}
             </div>
         );
-    }else{
-        return(
-            <div className={styles.wrapper}>
-                {users.map((element,index)=>
-                    <div key={index}>
+    }
+
+    else {
+        return (
+            <div className={styles.columnWrapper}>
+                {users.map((element, index) =>
+                    (<div key={index} className={styles.item}>
                         <NavLink
-                                 exact to={`/profile/${element.username}`}>
-                            <UserLink ava={element.image} nick={element.username? element.username:element}
-                                      stylednick={{fontWeight:600}}/></NavLink>
-                        {/*<Button isSubscribed={} isSubscribing={} click={()=>props.subscribe({username:props.usernam, aunt:element.username, subs:props.state.user.subscribed})} variation={2}/>*/}
-                    </div>
+                            exact to={`/profile/${element.username}`}>
+                            <UserLink ava={element.image} nick={element.username ? element.username : element}
+                                      stylednick={{fontWeight: 600, fontSize:"14px", marginLeft:"10px"}}/></NavLink>
+                        <Button user={element.username} id={index} click={()=>{
+                            props.subscribeMain({username:element.username, aunt:username, subscribed})
+                        }} variation={2}/>
+                    </div>)
                 )}
             </div>
         );
     }
 
 }
-
-const mapDispatchToProps = (dispatch) =>{
-    return {
-        subscribe: (user) => dispatch(subscribe(user)),
-        getSubscribedUsers: (user) => dispatch(getSubscribedUsers(user))
-    }
-}
-const mapStateToProps = (state) => ({
-    visitedPage: state.visitedPage,
-    usernam: state.user.username,
-    state:state,
-});
-export default connect(mapStateToProps, mapDispatchToProps)(UserWrapper);
+const mapDispatchToProps = (dispatch) =>({
+    subscribeMain: (user) => dispatch(subscribeMain(user))
+})
+export default connect(null, mapDispatchToProps)(UserWrapper);

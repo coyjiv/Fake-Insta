@@ -9,10 +9,18 @@ const authenticate = createAsyncThunk(
 );
 
 const getRecommendations = createAsyncThunk(
-  "user/getRecommendations",
-  async (username) => {
-    return (await axios(`/user/${username}/recommendations`)).data;
-  }
+    "user/getRecommendations",
+    async (username) => {
+        return (await axios(`/user/${username}/recommendations`)).data;
+    }
+);
+const subscribeMain = createAsyncThunk(
+    'user/subscribeMain',
+    async ({username, aunt, subscribed}) => {
+        const status = await axios.post(`/user/${username}/subscribe`,{"user":`${aunt}`});
+        return {status:status.data.status, username, subscribed};
+    }
 );
 
-export { authenticate, getRecommendations };
+
+export { authenticate, getRecommendations, subscribeMain };

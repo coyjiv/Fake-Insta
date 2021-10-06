@@ -47,7 +47,6 @@ const checkIfSubscribed = createAsyncThunk(
     'user/checkIfSubscribed',
     async ({username, aunt}) => {
         const subs = await axios(`/user/${aunt}/subscribed`)
-        console.log(username, aunt, subs)
         if(subs.data.includes(username)){
             return true
         }
